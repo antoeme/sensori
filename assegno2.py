@@ -68,6 +68,10 @@ if (y != 0):
     
     print(format(x[0],'b'),format(x[1],'b'),format(x[2],'b'),format(x[3],'b'), sep ="")
     
+
+
+
+    #daniele
     
 
     
