@@ -11,5 +11,9 @@ def hello():
     counter=str(redis.get('hits'), 'utf-8')
     return 'Welcome, this page has been viewed '+ counter+'time(s)'
 
+@app.route('/prova')
+def helloworld():
+    return 'helloworld'
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
