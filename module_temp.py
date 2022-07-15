@@ -15,11 +15,12 @@ num_sensori = 4
 with open("StatusTemperature.html","r") as f:
     doc = BeautifulSoup(f,"html.parser")
 
-#print(doc.prettify)
+#print(doc.prettify())
 
 tags = doc.find_all(class_ = "temp" )
 temps= []
-for l in range(num_sensori):
+for l in range(len(tags)):
     t = tags[l].string
     temps.append(t)
 print(temps)
+
