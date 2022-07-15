@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0019)http://10.10.10.81/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>KMtronic DS18B20 Temperature Monitor</title>
+<link href="./StatusTemeprature_files/rc.css" rel="stylesheet">
+<script src="./StatusTemeprature_files/rc.js.download"></script>
+</head>
+<body>
+<div id="shadow-one"><div id="shadow-two"><div id="shadow-three"><div id="shadow-four">
+<div id="page">
+<div align="right">
+LAN DS18B20 Temperature Monitor v2.1</div>
+<br>
+<div id="menu">
+<a href="http://10.10.10.81/index.htm">Temperature Monitor</a>
+<a href="http://10.10.10.81/net_config.htm">Network Configuration</a>
+<a href="http://10.10.10.81/sen_config.htm">Sensors Configuration</a>
+<a href="http://10.10.10.81/auth.htm">Authorization Configuration</a>
+</div>
+
+<div id="content">
+<h1 align="center">Temperature monitor (�C)</h1><br>
+	<div id="loading" style="display: none;"><h2 style="color:red; text-align:center">Error:<br>Connection to LAN DS18B20 Temperature Monitor was lost.</h2></div>
+	<div id="display" style="display: inline;">
+		<div class="rectangle">
+			<div class="text" id="id1">Temp1</div>
+			<div class="temp" id="divT1">40.93</div>
+		</div>
+		<br>
+		<div class="rectangle">
+			<div class="text" id="id2">Temp2</div>
+			<div class="temp" id="divT2">27.62</div>
+		</div>
+			<br>
+		<div class="rectangle">
+			<div class="text" id="id3"> </div>
+			<div class="temp" id="divT3">---</div>
+		</div>
+		<br>
+		<div class="rectangle">
+			<div class="text" id="id4"> </div>
+			<div class="temp" id="divT4">---</div>
+		</div>		 
+	</div>
+</div>
+<script>
+function updateStatus(e){var t=document.getElementById("display"),n=document.getElementById("loading");if(!e)return t.style.display="none",void(n.style.display="inline");for(t.style.display="inline",n.style.display="none",i=0;i<4;i++)document.getElementById("divT"+(i+1)).innerHTML=getXMLValue(e,"temp",i)}setTimeout("newAJAXCommand('status.xml', updateStatus, true)",500);
+</script>
+<div class="spacer">&nbsp;</div>
+<div id="footer" style="font-family: Verdana; font-size: 20px; color: black">� KMtronic</div>
+</div></div></div></div></div>
+
+</body></html>
