@@ -1,18 +1,11 @@
 
 import json
 from flask import Flask,jsonify
-from redis import Redis
 from requests import request
 import module_temp as mt
 
 app = Flask(__name__)
-redis = Redis(host='redis',port=6379)
 
-# @app.route('/')
-# def hello():
-#     redis.incr('hits')
-#     counter=str(redis.get('hits'), 'utf-8')
-#     return 'Welcome, this page has been viewed '+ counter+'time(s)'
 
 @app.route('/prova')
 def helloworld():
