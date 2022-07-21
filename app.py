@@ -14,7 +14,7 @@ def helloworld():
 @app.route('/temp', methods=['GET', 'POST'] )   #rotta per la get delle temperature
 def get_temp():
     # if (request.method == 'GET'):             -- controllare perchè non funziona if 
-        json_temps = json.dumps(mt.temps)   # dump della lista delle temperature presa in module_temp.py
+        json_temps = json.dumps(mt.get_temps())   # dump della lista delle temperature presa in module_temp.py
         return json_temps
  
 

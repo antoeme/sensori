@@ -1,26 +1,27 @@
 #modulo per il parsing html delle temperature
 
-from cgitb import html, text
-from unittest import result
+from time import sleep
 from bs4 import BeautifulSoup
 import requests
 
 
 num_sensori = 4 
-#url = "StatusTemperature.html"
+url_sensori = "http://10.10.10.81"
 
-#result = requests.get(url)
-#print(result.text)
+# with open("StatusTemperature.html","r") as f:
+#     doc = BeautifulSoup(f,"html.parser")
 
-with open("StatusTemperature.html","r") as f:
-    doc = BeautifulSoup(f,"html.parser")
+def get_temps():
+    result = requests.get(url_sensori)
+    doc = BeautifulSoup(result.text,"html.parser")  #passiamo result.text preso dalla get all'url dei sensori
+    # print(doc)
+    tags = doc.find_all(class_ = "temp" )
+    temps= []
+    for l in range(len(tags)):
+        t = tags[l].string
+        temps.append(t)
+    return temps
 
-#print(doc.prettify())
+# print(get_temps())
 
-tags = doc.find_all(class_ = "temp" )
-temps= []
-for l in range(len(tags)):
-    t = tags[l].string
-    temps.append(t)
-print(temps)
 
