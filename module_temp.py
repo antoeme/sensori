@@ -16,12 +16,16 @@ def get_temps():
     doc = BeautifulSoup(result.text,"html.parser")  #passiamo result.text preso dalla get all'url dei sensori
     # print(doc)
     tags = doc.find_all(class_ = "temp" )
-    temps= []
+    temps= {}
+
     for l in range(len(tags)):
         t = tags[l].string
-        temps.append(t)
+        if(t!="---"):
+            temps["T"+ str(l+1)] = float(t)
+        else:
+            temps["T"+ str(l+1)] = 0
     return temps
 
-# print(get_temps())
+print(get_temps())
 
 
