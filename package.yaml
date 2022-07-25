@@ -1,11 +1,11 @@
-descriptor-schema-version: "2.2"
+descriptor-schema-version: "2.8"
 
 info:
-  name: collector 
+  name: sensori 
   description: "Simple Docker app"
   version: "1.0"
-  author-link: "http://www.cisco.com"
-  author-name: "Cisco Systems"
+  #author-link: "http://www.cisco.com"
+  #author-name: "Cisco Systems"
 
 app:
   cpuarch: "x86_64"
@@ -26,4 +26,4 @@ startup:
   rootfs: rootfs.tar
   # runtime: python
   # runtime-versione: 3.10.1
-  target: python collector.py
+  target: python app.py
