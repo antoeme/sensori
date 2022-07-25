@@ -1,0 +1,29 @@
+descriptor-schema-version: "2.2"
+
+info:
+  name: collector 
+  description: "Simple Docker app"
+  version: "1.0"
+  author-link: "http://www.cisco.com"
+  author-name: "Cisco Systems"
+
+app:
+  cpuarch: "x86_64"
+  type: docker
+  resources:
+    profile: c1.small
+    network:
+      -   
+        interface-name: eth0
+        # ports:
+        #     tcp:
+        #     - 8000
+        #     - 8001
+        #     udp:
+        #     - 8000
+        #     - 8001
+startup:
+  rootfs: rootfs.tar
+  # runtime: python
+  # runtime-versione: 3.10.1
+  target: python collector.py
