@@ -1,29 +1,25 @@
-descriptor-schema-version: "2.8"
+descriptor-schema-version: "2.2"
 
 info:
-  name: sensori 
-  description: "Simple Docker app"
+  name: SampleNodeApp
+  description: "Simple Docker Style app that runs a nodejs server"
   version: "1.0"
-  #author-link: "http://www.cisco.com"
-  #author-name: "Cisco Systems"
+  author-link: "http://www.cisco.com"
+  author-name: "Cisco Systems"
 
 app:
+  # Indicate app type (vm, paas, lxc etc.,)
   cpuarch: "x86_64"
   type: docker
   resources:
     profile: c1.small
     network:
-      -   
+      -
         interface-name: eth0
-        # ports:
-        #     tcp:
-        #     - 8000
-        #     - 8001
-        #     udp:
-        #     - 8000
-        #     - 8001
-startup:
-  rootfs: rootfs.tar
-  # runtime: python
-  # runtime-versione: 3.10.1
-  target: python app.py
+        ports:
+            tcp: [5000]
+
+# Specify runtime and startup
+  startup:
+    rootfs: rootfs.tar
+    target: flask run

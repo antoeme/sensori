@@ -3,10 +3,12 @@
 from time import sleep
 from bs4 import BeautifulSoup
 import requests
+from os import getenv
 
-
-num_sensori = 4 
-url_sensori = "http://10.10.10.81"
+num_sensori = getenv("num_sensori") or 4
+url_sensori = getenv("url_sensori") or "http://10.10.10.81"
+# num_sensori = 4 
+# url_sensori = "http://10.10.10.81"
 
 # with open("StatusTemperature.html","r") as f:
 #     doc = BeautifulSoup(f,"html.parser")
