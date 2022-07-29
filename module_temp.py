@@ -18,6 +18,8 @@ def get_temps():
     doc = BeautifulSoup(result.text,"html.parser")  #passiamo result.text preso dalla get all'url dei sensori
     # print(doc)
     tags = doc.find_all(class_ = "temp" )
+
+    #print (tags)
     temps= {}
 
     for l in range(len(tags)):
@@ -27,6 +29,58 @@ def get_temps():
         else:
             temps["T"+ str(l+1)] = 0
     return temps
+
+def get_temps1():
+    result = requests.get(url_sensori)
+    doc = BeautifulSoup(result.text,"html.parser")  #passiamo result.text preso dalla get all'url dei sensori
+    
+    tags = doc.find(id = 'divT1')
+
+    tags = tags.string
+
+    if (tags == "---"):
+        tags = 0
+    
+    return tags
+
+def get_temps2():
+    result = requests.get(url_sensori)
+    doc = BeautifulSoup(result.text,"html.parser")  #passiamo result.text preso dalla get all'url dei sensori
+    
+    tags = doc.find(id = 'divT2')
+    
+    tags = tags.string
+
+    if (tags == "---"):
+        tags = 0
+    
+    return tags
+
+def get_temps3():
+    result = requests.get(url_sensori)
+    doc = BeautifulSoup(result.text,"html.parser")  #passiamo result.text preso dalla get all'url dei sensori
+    
+    tags = doc.find(id = 'divT3')
+
+    tags = tags.string
+
+    if (tags == "---"):
+        tags = 0
+    
+    return tags
+
+def get_temps4():
+    result = requests.get(url_sensori)
+    doc = BeautifulSoup(result.text,"html.parser")  #passiamo result.text preso dalla get all'url dei sensori
+    
+    tags = doc.find(id = 'divT4')
+
+    tags = tags.string
+    
+    if (tags == "---"):
+        tags = 0
+    
+    return tags
 
 print(get_temps())
 
