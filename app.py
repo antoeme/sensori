@@ -6,7 +6,6 @@ import module_temp as mt
 
 app = Flask(__name__)
 
-
 @app.route('/prova')
 def helloworld():
     return jsonify({"about": " Helloworld !"})
@@ -17,28 +16,13 @@ def get_temp():
         json_temps = json.dumps(mt.get_temps())   # dump della lista delle temperature presa in module_temp.py
         return json_temps
 
-@app.route('/temp1', methods=['GET'])
-def get_temp1():
-    json_temps = json.dumps(mt.get_temps1())
-    return (json_temps)
-
-@app.route('/temp2', methods=['GET'])
-def get_temp2():
-    json_temps = json.dumps(mt.get_temps2())
-    return (json_temps)
-
-@app.route('/temp3', methods=['GET'])
-def get_temp3():
-    json_temps = json.dumps(mt.get_temps3())
-    return (json_temps)
-
-@app.route('/temp4', methods=['GET'])
-def get_temp4():
-    json_temps = json.dumps(mt.get_temps4())
-    return (json_temps)
-
-
- 
+@app.route('/temp/<int:id_sensore>', methods=['GET', 'POST'])
+def get_temp_id(id_sensore):
+    json_temps = mt.get_temps()
+    chiave = "T" + str(id_sensore)
+    temp = json_temps[chiave]
+    
+    return (json.dumps(str(temp)))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
