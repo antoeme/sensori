@@ -7,20 +7,16 @@ from os import getenv
 
 num_sensori = getenv("num_sensori") or 4
 url_sensori = getenv("url_sensori") or "http://10.10.10.81"
-# num_sensori = 4 
-# url_sensori = "http://10.10.10.81"
-
-# with open("StatusTemperature.html","r") as f:
-#     doc = BeautifulSoup(f,"html.parser")
 
 def get_temps():
     result = requests.get(url_sensori)
     doc = BeautifulSoup(result.text,"html.parser")  #passiamo result.text preso dalla get all'url dei sensori
-    # print(doc)
     tags = doc.find_all(class_ = "temp" )
 
-    #print (tags)
     temps= {}
+
+    if(len(tags)) == 0:
+        return temps
 
     for l in range(len(tags)):
         t = tags[l].string
