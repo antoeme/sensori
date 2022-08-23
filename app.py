@@ -2,10 +2,37 @@
 import json
 from flask import Flask,jsonify
 from requests import request
-import module_temp as mt
+#import module_temp as mt
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
+from time import sleep
+from bs4 import BeautifulSoup
+import requests
+from os import getenv
 
+num_sensori = getenv("num_sensori") or 4
+url_sensori = getenv("url_sensori") or "http://10.10.10.81"
+
+def get_temps():
+    result = requests.get(url_sensori)
+    doc = BeautifulSoup(result.text,"html.parser")  #passiamo result.text preso dalla get all'url dei sensori
+    tags = doc.find_all(class_ = "temp" )
+
+    temps= {}
+
+    if(len(tags)) == 0:
+        return temps
+
+    for l in range(len(tags)):
+        t = tags[l].string
+        if(t!="---"):
+            temps["T"+ str(l+1)] = float(t)
+        else:
+            temps["T"+ str(l+1)] = 0
+    return temps
+
+
+print(get_temps())
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
@@ -22,15 +49,10 @@ def verify_password(username, password):
 
 
 
-@app.route('/prova')
-@auth.login_required
-def helloworld():
-    return jsonify({"about": " Helloworld !"})
-
 @app.route('/temp', methods=['GET'])   #rotta per la get delle temperature
 @auth.login_required
 def get_temp(): 
-    json_temps = json.dumps(mt.get_temps())   # dump della lista delle temperature presa in module_temp.py
+    json_temps = json.dumps(get_temps())   # dump della lista delle temperature presa in module_temp.py
     return json_temps
 
 @app.route('/temp/<int:id_sensore>', methods=['GET', 'POST'])
@@ -39,7 +61,7 @@ def get_temp_id(id_sensore):
     if((id_sensore>4) or (id_sensore<1)):
         return ("Errore: ID sensore non presente!")
     else:
-        json_temps = mt.get_temps()
+        json_temps = get_temps()
         chiave = "T" + str(id_sensore)
         temp = json_temps[chiave]
     
