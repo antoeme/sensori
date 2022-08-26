@@ -2,7 +2,7 @@
 import json
 from flask import Flask,jsonify
 from requests import request
-#import module_temp as mt
+from dotenv import load_dotenv
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
 from time import sleep
@@ -10,11 +10,14 @@ from bs4 import BeautifulSoup
 import requests
 from os import getenv
 
-num_sensori = getenv("num_sensori") or 4
-url_sensori = getenv("url_sensori") or "http://10.10.10.81"
+NUM_SENSORI = getenv("NUM_SENSORI") 
+URL_SENSORI = getenv("URL_SENSORI") 
+
+# load environment variables from '.env' file
+load_dotenv()
 
 def get_temps():
-    result = requests.get(url_sensori)
+    result = requests.get(URL_SENSORI)
     doc = BeautifulSoup(result.text,"html.parser")  #passiamo result.text preso dalla get all'url dei sensori
     tags = doc.find_all(class_ = "temp" )
 
@@ -58,7 +61,7 @@ def get_temp():
 @app.route('/temp/<int:id_sensore>', methods=['GET', 'POST'])
 @auth.login_required
 def get_temp_id(id_sensore):
-    if((id_sensore>4) or (id_sensore<1)):
+    if((id_sensore>NUM_SENSORI) or (id_sensore<1)):
         return ("Errore: ID sensore non presente!")
     else:
         json_temps = get_temps()
