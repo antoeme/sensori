@@ -70,5 +70,5 @@ def get_temp_id(id_sensore):
     
     return (json.dumps("T" + str(id_sensore) + "=" + str(temp)))
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', debug=True)
